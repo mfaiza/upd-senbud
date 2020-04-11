@@ -52,6 +52,43 @@ class Admin extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
+    function tambahadmin(){
+     
+        $data = array(
+            'set' => $this->crud->get('user',["role" =>'1'])->result()
+        );       
+        $this->load->view('layouts/header');
+        $this->load->view('layouts/nav');
+        $this->load->view('admin/kelola',$data);
+        $this->load->view('layouts/footer');        
+    }
+    function addadmin(){
+        $this->validation();
+        if($this->form_validation->run() == FALSE){
+            $this->message = "Isi Semua Data dengan Benar!!!";
+            $this->session->set_flashdata('warning',$this->message);
+            redirect('admin/tambahadmin');
+        }else{
+            $query = array(
+                'username' => $this->input->post('username'),
+                'password' => sha1($this->input->post('password')),
+                'role' => '1',
+                'id_siswa' => '1',
+            );
+            $this->crud->insert('user',$query);
+            $this->message = "Data Admin berhasil disimpan!!!";
+            $this->session->set_flashdata('success', $this->message);
+            redirect('admin/tambahadmin');
+        }
+    }
+
+    function deleteadmin($id){
+        $this->crud->delete('user','id_user',$id);
+        $this->message = "Data Admin Berhasil Dihapus !";
+        $this->session->set_flashdata('success',$this->message);            
+        redirect('admin/tambahadmin');
+    }
+
     function ekskul(){
         $data = array(
             'set' => $this->crud->all('ekskul')->result(),
