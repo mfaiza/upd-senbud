@@ -35,7 +35,6 @@ class Admin extends CI_Controller {
         $data = array(
             'set' => $this->crud->all('siswa')->result()
         );
-
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
         $this->load->view('admin/siswa/kelola',$data);
