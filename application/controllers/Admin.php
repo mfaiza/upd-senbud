@@ -35,6 +35,7 @@ class Admin extends CI_Controller {
         $data = array(
             'set' => $this->crud->all('siswa')->result()
         );
+
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
         $this->load->view('admin/siswa/kelola',$data);
@@ -92,8 +93,6 @@ class Admin extends CI_Controller {
     function ekskul(){
         $data = array(
             'set' => $this->crud->all('ekskul')->result(),
-
-
         );
 
         $this->load->view('layouts/header');
@@ -105,8 +104,6 @@ class Admin extends CI_Controller {
     function senbud(){
         $data = array(
             'set' => $this->crud->all('senbud')->result(),
-
-
         );
 
         $this->load->view('layouts/header');
@@ -139,5 +136,9 @@ class Admin extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
+    function validation(){
+        $this->form_validation->set_rules('username','','required');
+        $this->form_validation->set_rules('password','','required');
+    }
     
 }

@@ -21,19 +21,16 @@ date_default_timezone_set('UTC')
 							        <tr>
 							            <th>Username</th>
 							            <th>Password</th>
-                                        <!-- <th>Tanggal Dibuat</th> -->
                                         <th>Opsi</th>
 							        </tr>
 							    </thead>
 							    <tbody>
-                                    <!-- <?php $date = date(d-m-Y ); ?> -->
                                     <?php  foreach($set as $row){ ?>
                                     <tr>
                                         <td><?php echo $row->username;?></td>
 							            <td><?php echo $row->password;?></td> 
-							            <!-- <td><?= $date ?></td> -->
 							             <td>
-							                 <?php echo anchor('admin/deleteadmin/'.$row->id_user,'<button class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>');?>
+							                 <?php echo anchor('admin/deleteadmin/'.$row->id_user,'<button class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>');?> 
 							            </td>
 							            </tr>
 							         <?php } ?>   
