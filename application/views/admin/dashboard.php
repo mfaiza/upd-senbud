@@ -33,7 +33,7 @@
 										<span class="icon"><i class="fa fa-list"></i></span>
 										<p>
 											<span class="number"><?php echo $set_ekskul;?></span>
-											<span class="title">Total Ekstrakurikuler</span>
+											<span class="title">Total Ekskul</span>
 										</p>
 									</div>
 								</div>
@@ -41,8 +41,26 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-list"></i></span>
 										<p>
-											<span class="number"><?php echo $set_pendaftar;?></span>
-											<span class="title">Total Pendaftaran</span>
+											<span class="number"><?php echo $set_senbud;?></span>
+											<span class="title">Total Senbud</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-list"></i></span>
+										<p>
+											<span class="number"><?php echo $set_pendaftar_ekskul;?></span>
+											<span class="title">Total Pendaftaran Ekskul</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-list"></i></span>
+										<p>
+											<span class="number"><?php echo $set_pendaftar_senbud;?></span>
+											<span class="title">Total Pendaftaran Senbud</span>
 										</p>
 									</div>
 								</div>

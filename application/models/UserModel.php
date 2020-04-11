@@ -22,7 +22,7 @@ class UserModel extends CI_Model {
         if($this->session->userdata('role') == 1){
             redirect('admin');
         } else {
-            redirect('user/register');
+            redirect('user/registerEkskul');
         }
         
     }

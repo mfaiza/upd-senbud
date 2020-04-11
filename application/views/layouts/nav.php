@@ -40,14 +40,16 @@
 
 						<li><a href="<?php echo site_url('admin/pengguna');?>" ><i class="fa fa-user fa-lg"></i> <span>Data Pengguna</span></a></li>
 						<li><a href="<?php echo site_url('admin/ekskul');?>" ><i class="fa fa-tags fa-lg"></i><span>Data Ekstrakurikuler</span></a></li>
-						<li><a href="<?php echo site_url('admin/galeri');?>" ><i class="fa fa-image fa-lg"></i><span>Galeri Ekstrakurikuler</span></a></li>
-						<li><a href="<?php echo site_url('admin/tambahadmin');?>"><i class="fa fa-user fa-lg"></i><span>Data Administrator</span></a></li>
-						
+						<li><a href="<?php echo site_url('admin/galeriEkskul');?>" ><i class="fa fa-image fa-lg"></i><span>Galeri Ekstrakurikuler</span></a></li>
+						<li><a href="<?php echo site_url('admin/senbud');?>" ><i class="fa fa-tags fa-lg"></i><span>Data Seni Budaya</span></a></li>
+						<li><a href="<?php echo site_url('admin/galeriSenbud');?>" ><i class="fa fa-image fa-lg"></i><span>Galeri Seni Budaya</span></a></li>
 						
                         <?php } else { ?>
                             
-                            <li><a href="<?php echo site_url('user/register');?>"><i class="fa fa-list fa-lg"></i><span>Registrasi Ekskul</span></a></li>
-                           	<li><a href="<?php echo site_url('user/galeri');?>"><i class="fa fa-image fa-lg"></i><span>Galeri Ekstrakurikuler</span></a></li>
+                            <li><a href="<?php echo site_url('user/registerEkskul');?>"><i class="fa fa-list fa-lg"></i><span>Registrasi Ekskul</span></a></li>
+                           	<li><a href="<?php echo site_url('user/galeriEkskul');?>"><i class="fa fa-image fa-lg"></i><span>Galeri Ekstrakurikuler</span></a></li>
+                            <li><a href="<?php echo site_url('user/registerSenbud');?>"><i class="fa fa-list fa-lg"></i><span>Registrasi Senbud</span></a></li>
+                           	<li><a href="<?php echo site_url('user/galeriSenbud');?>"><i class="fa fa-image fa-lg"></i><span>Galeri Seni Budaya</span></a></li>
                             
                         <?php } ?>
 					</ul>

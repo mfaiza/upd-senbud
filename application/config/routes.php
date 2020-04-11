@@ -53,4 +53,3 @@ $route['default_controller'] = 'login';
 $route['ekskul/hapus-pendaftar/{:num}/{:num}'] = 'ekskul/hapus_pendaftar';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
-$route['register'] = 'user/register';

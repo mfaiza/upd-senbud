@@ -72,6 +72,8 @@ class Siswa extends CI_Controller {
 		$this->message = "Data Siswa Berhasil Dihapus !";
         $this->session->set_flashdata('success',$this->message);            
         redirect('admin/siswa');
+
+
 	}
 
 	function validation(){

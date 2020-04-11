@@ -2,7 +2,7 @@
 
 if(defined('basepath')) exit ('no direct access script allowed');
 
-class Ekskul extends CI_Controller {
+class Senbud extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
@@ -13,14 +13,14 @@ class Ekskul extends CI_Controller {
 		$this->validation();
 		if($this->form_validation->run() == FALSE){
 
-			$this->message = "Komponen Ekskul Wajib Diisi !";
+			$this->message = "Komponen Senbud Wajib Diisi !";
 	        $this->session->set_flashdata('warning',$this->message);            
-	        redirect('admin/ekskul');
+	        redirect('admin/senbud');
 
 		} else {
 
 			$query = array(
-				'nama_ekskul' => $this->input->post('nama_ekskul'),
+				'nama_senbud' => $this->input->post('nama_senbud'),
 				'penanggung_jawab' => $this->input->post('penanggung_jawab'),
 				'lokasi' => $this->input->post('lokasi'),
 				'hari' => $this->input->post('hari'),
@@ -28,10 +28,10 @@ class Ekskul extends CI_Controller {
 				'jam_selesai' => $this->input->post('jam_selesai')
 				
 			);
-			$this->crud->insert('ekskul',$query);
-			$this->message = "Data Ekskul Berhasil Disimpan !";
-	        $this->session->set_flashdata('success',$this->message);    
-	        redirect('admin/ekskul');
+			$this->crud->insert('senbud',$query);
+			$this->message = "Data Senbud Berhasil Disimpan !";
+	        $this->session->set_flashdata('success',$this->message);            
+	        redirect('admin/senbud');
 
 		}
 		
@@ -40,43 +40,40 @@ class Ekskul extends CI_Controller {
 
 	function get($id){
 		$query = array(
-			'id_ekskul' => $id
+			'id_senbud' => $id
 		);
 
-		$result = $this->crud->get('ekskul',$query)->row();
+		$result = $this->crud->get('senbud',$query)->row();
 		echo json_encode($result);
 	}
 
 	function update(){
 		$query = array(
-				'nama_ekskul' => $this->input->post('nama_ekskul'),
+				'nama_senbud' => $this->input->post('nama_senbud'),
 				'penanggung_jawab' => $this->input->post('penanggung_jawab'),
 				'lokasi' => $this->input->post('lokasi'),
 				'hari' => $this->input->post('hari'),
 				'jam_mulai' => $this->input->post('jam_mulai'),
 				'jam_selesai' => $this->input->post('jam_selesai'),
 			);
-		$this->crud->update('ekskul',$query,'id_ekskul',$this->input->get('id_ekskul'));
-		
-		$this->crud->delete('ekskul','id_ekskul',$this->input->get('id_ekskul'));
-
-		$this->message = "Data Ekskul Berhasil Diubah !";
+		$this->crud->update('senbud',$query,'id_senbud',$this->input->post('id_senbud'));
+		$this->message = "Data Senbud Berhasil Diubah !";
         $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/ekskul');
+        redirect('admin/senbud');
 	}
 
 	function destroy($id){
-		$this->crud->delete('ekskul','id_ekskul',$id);
-		$this->message = "Data Ekskul Berhasil Dihapus !";
+		$this->crud->delete('senbud','id_senbud',$id);
+		$this->message = "Data Senbud Berhasil Dihapus !";
         $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/ekskul');
+        redirect('admin/senbud');
 	}
 
-	function data_pendaftar($id_ekskul){
+	function data_pendaftar($id_senbud){
 		$data = array(
 			'set' => $this->crud->threeTablesFusionCondition(
 				'registrasi',
-				'ekskul',
+				'senbud',
 				'siswa',
 				'siswa.id_siswa as id_siswa,
 				 siswa.nama_siswa as nama,
@@ -85,32 +82,32 @@ class Ekskul extends CI_Controller {
 				 siswa.jurusan as jurusan,
 				 siswa.rombel as rombel,
 				 registrasi.tanggal_daftar as tanggal,
-				 ekskul.id_ekskul as id_ekskul
+				 senbud.id_senbud as id_senbud
 				',
-				'ekskul.id_ekskul=registrasi.id_ekskul',
+				'senbud.id_senbud=registrasi.id_senbud',
 				'siswa.id_siswa=registrasi.id_siswa',
-				'registrasi.id_ekskul',
-				$id_ekskul)->result()
+				'registrasi.id_senbud',
+				$id_senbud)->result()
 
 		);
 
 
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
-        $this->load->view('admin/ekskul/pendaftar',$data);
+        $this->load->view('admin/senbud/pendaftar',$data);
         $this->load->view('layouts/footer');
 	}
 
-	function hapus_pendaftar($id_ekskul,$id_siswa){
-		$this->crud->delete_pendaftar($id_ekskul,$id_siswa);
+	function hapus_pendaftar($id_senbud,$id_siswa){
+		$this->crud->delete_pendaftar($id_senbud,$id_siswa);
 		$this->message = "Data Pendaftar Berhasil Dihapus !";
         $this->session->set_flashdata('success',$this->message);            
-        redirect('admin/ekskul');
+        redirect('admin/senbud');
 
 	}
 
 	function validation(){
-        $this->form_validation->set_rules('nama_ekskul','','required');
+        $this->form_validation->set_rules('nama_senbud','','required');
         $this->form_validation->set_rules('penanggung_jawab','','required');
         $this->form_validation->set_rules('lokasi','','required');
         $this->form_validation->set_rules('hari','','required');

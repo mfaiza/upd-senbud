@@ -8,18 +8,18 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">Kelola Ekskul</h3>
-							<p class="panel-subtitle">Admin / Data Ekstrakurikuler</p>
+							<h3 class="panel-title">Kelola Senbud</h3>
+							<p class="panel-subtitle">Admin / Data Seni Budaya</p>
 						</div>
 						<div class="panel-body">
 						   <div class="table-responsive">
 							<table class="display" id="data">
 							    <thead>
 							        <tr>
-                                        <th>Nama Ekstrakurikuler</th>
+                                        <th>Nama Seni Budaya</th>
 							            <th>Penanggung Jawab</th>
-							            <th>Lokasi Ekskul</th>
-							            <th>Jadwal Ekskul</th>      
+							            <th>Lokasi Senbud</th>
+							            <th>Jadwal Senbud</th>      
                                         <th>Opsi</th>
 							        </tr>
 							    </thead>
@@ -28,17 +28,17 @@
                                     <?php  foreach($set as $row){ ?>
                                      
                                     <tr>
-                                        <td><?php echo $row->nama_ekskul;?></td>
+                                        <td><?php echo $row->nama_senbud;?></td>
 							            <td><?php echo $row->penanggung_jawab;?></td> 
 							            <td><?php echo $row->lokasi;?></td>
                                         <td><?php echo $row->hari;?>, <?php echo $row->jam_mulai;?> - <?php echo $row->jam_selesai;?></td>
                                        
 							            <td>
-							                <button class="btn btn-warning" onclick="edit_supplier(<?php echo $row->id_ekskul;?>)"><i class="fa fa-edit"></i> Edit</button>   
-							                <button class="btn btn-success" onclick="dokumentasi(<?php echo $row->id_ekskul;?>)"><i class="fa fa-camera"></i> Unggah</button>
-							                 <?php echo anchor('ekskul/destroy/'.$row->id_ekskul,'<button class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>');
+							                <button class="btn btn-warning" onclick="edit_supplier(<?php echo $row->id_senbud;?>)"><i class="fa fa-edit"></i> Edit</button>   
+							                <button class="btn btn-success" onclick="dokumentasi(<?php echo $row->id_senbud;?>)"><i class="fa fa-camera"></i> Unggah</button>
+							                 <?php echo anchor('senbud/destroy/'.$row->id_senbud,'<button class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>');
                                              ?>
-                                             <?php echo anchor('ekskul/data-pendaftar/'.$row->id_ekskul,'<button class="btn btn-primary"><i class="fa fa-list"></i> Lihat Pendaftar</button>');
+                                             <?php echo anchor('senbud/data-pendaftar/'.$row->id_senbud,'<button class="btn btn-primary"><i class="fa fa-list"></i> Lihat Pendaftar</button>');
                                              ?>
 
 							            </td>
@@ -61,7 +61,7 @@
     function dokumentasi(id){
         $('#form')[0].reset();
         $("#dokumentasi").modal('show');
-        $('#id_ekskul').val(id);
+        $('#id_senbud').val(id);
         $('[name=submit]').val('Tambah').show();
         $('.modal-footer').show();
 
@@ -74,23 +74,23 @@
 
       //Ajax Load data from ajax
       $.ajax({
-        url : "<?php echo base_url('ekskul/get')?>/" + id,
+        url : "<?php echo base_url('senbud/get')?>/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
-            $('[name="id_ekskul"]').val(data.id_ekskul);
-            $('[name="nama_ekskul"]').val(data.nama_ekskul);
+            $('[name="id_senbud"]').val(data.id_senbud);
+            $('[name="nama_senbud"]').val(data.nama_senbud);
             $('[name="penanggung_jawab"]').val(data.penanggung_jawab);
             $('[name="lokasi"]').val(data.lokasi);
             $('[name="hari"]').val(data.hari);
             $('[name="jam_mulai"]').val(data.jam_mulai);
             $('[name="jam_selesai"]').val(data.jam_selesai);
             $('#myModal').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Ekskul'); // Set title to Bootstrap modal title
-            $('#form').attr('action','<?php echo base_url('ekskul/update');?>'); //INI GA JALAN
+            $('.modal-title').text('Edit Senbud'); // Set title to Bootstrap modal title
             $('[name=submit]').val('Edit').show();
             $('.modal-footer').show();
+            $('#form').attr('action','<?php echo site_url('senbud/update');?>');
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -101,7 +101,25 @@
     
    
 </script>
+<div id="dokumentasi" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tambah Dokumentasi</h4>
+            </div>
+            <div class="modal-body">
+                <?php echo form_open_multipart('dokumentasi/create',array('id' => 'form' ,'class' => 'dropzone'));?>
+                <input type="hidden" name="id_senbud" id="id_senbud">
+            </div>
+            <div class="modal-footer">
+            <input type="submit" name="submit" value="Selesai" class="btn btn-success" id="button-disabled">
+            <?php echo form_close();?>
+        </div>
+        </div>
+    </div>
 
+</div>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -109,18 +127,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Tambah Ekskul</h4>
+        <h4 class="modal-title">Tambah Senbud</h4>
       </div>
       <div class="modal-body">
-          <form action=""></form>
-        <?php echo form_open('ekskul/create',array('id' => 'form'));?>
+        <?php echo form_open('senbud/create',array('id' => 'form'));?>
         
          
-                <input type="hidden"  name="id_ekskul"/>
+                <input type="hidden"  name="id_senbud"/>
 
                 <div class="form-group" id="pengguna">
-                    <label>Nama Ekstrakurikuler</label>
-                    <input type="text" name="nama_ekskul" class="form-control">
+                    <label>Nama Seni Budaya</label>
+                    <input type="text" name="nama_senbud" class="form-control">
                 </div>
                
                 <div class="form-group" id="email">

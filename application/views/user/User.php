@@ -26,13 +26,13 @@ class User extends CI_Controller {
         $data = array(
             'set' => $this->crud->all('ekskul')->result(),
             'set_siswa' => $this->crud->twoTablesFusionCondition('user','siswa','*','user.id_siswa = siswa.id_siswa','id_user',$this->session->userdata('id_user'))->result(),
-            'set_ekskul' => $this->crud->twoTablesFusionCondition('registrasi_ekskul','ekskul','*','registrasi_ekskul.id_ekskul= ekskul.id_ekskul','id_siswa',$this->session->userdata('id_siswa'))->result(),
-            'total_ekskul' => $this->crud->get('registrasi_ekskul',$count)->num_rows()
+            'set_ekskul' => $this->crud->twoTablesFusionCondition('registrasi','ekskul','*','registrasi.id_ekskul= ekskul.id_ekskul','id_siswa',$this->session->userdata('id_siswa'))->result(),
+            'total_ekskul' => $this->crud->get('registrasi',$count)->num_rows()
         );
 
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
-        $this->load->view('user/registerEkskul',$data);
+        $this->load->view('user/register',$data);
         $this->load->view('layouts/footer');
     }
 
@@ -44,15 +44,15 @@ class User extends CI_Controller {
         );
 
         $data = array(
-            'set' => $this->crud->all('senbud')->result(),
+            'set' => $this->crud->all('ekskul')->result(),
             'set_siswa' => $this->crud->twoTablesFusionCondition('user','siswa','*','user.id_siswa = siswa.id_siswa','id_user',$this->session->userdata('id_user'))->result(),
-            'set_senbud' => $this->crud->twoTablesFusionCondition('registrasi_senbud','senbud','*','registrasi_senbud.id_senbud= senbud.id_senbud','id_siswa',$this->session->userdata('id_siswa'))->result(),
-            'total_senbud' => $this->crud->get('registrasi_senbud',$count)->num_rows()
+            'set_ekskul' => $this->crud->twoTablesFusionCondition('registrasi','ekskul','*','registrasi.id_ekskul= ekskul.id_ekskul','id_siswa',$this->session->userdata('id_siswa'))->result(),
+            'total_ekskul' => $this->crud->get('registrasi',$count)->num_rows()
         );
 
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
-        $this->load->view('user/registerSenbud',$data);
+        $this->load->view('user/register',$data);
         $this->load->view('layouts/footer');
     }
 
@@ -63,11 +63,11 @@ class User extends CI_Controller {
             'id_ekskul' => $id_ekskul      
         );
 
-        $result = $this->crud->get('registrasi_ekskul',$cek)->num_rows();
+        $result = $this->crud->get('registrasi',$cek)->num_rows();
         if($result > 0){
             $this->message = 'Anda tidak bisa mengikuti ekskul yang sama lebih dari satu';
             $this->session->set_flashdata('warning',$this->message);
-            redirect('user/registerEkskul');
+            redirect('user/register');
 
         } else {
 
@@ -75,13 +75,13 @@ class User extends CI_Controller {
                  'id_siswa' => $this->session->userdata('id_siswa')      
             );
 
-            $total = $this->crud->get('registrasi_ekskul',$count)->num_rows();
+            $total = $this->crud->get('registrasi',$count)->num_rows();
 
             if($total >= 3){
 
                 $this->message = 'Anda tidak bisa mengikuti ekskul lebih dari 3';
                 $this->session->set_flashdata('warning',$this->message);
-                redirect('user/registerEkskul');
+                redirect('user/register');
 
             } else {
 
@@ -91,10 +91,10 @@ class User extends CI_Controller {
                     'tanggal_daftar' => date('Y-m-d')
                 );
 
-                $this->crud->insert('registrasi_ekskul',$query);
+                $this->crud->insert('registrasi',$query);
                 $this->message = 'Anda berhasil mengikuti ekskul :)';
                 $this->session->set_flashdata('success',$this->message);
-                redirect('user/registerEkskul');
+                redirect('user/register');
             }
 
         }
@@ -107,11 +107,11 @@ class User extends CI_Controller {
             'id_senbud' => $id_senbud      
         );
 
-        $result = $this->crud->get('registrasi_senbud',$cek)->num_rows();
+        $result = $this->crud->get('registrasi',$cek)->num_rows();
         if($result > 0){
             $this->message = 'Anda tidak bisa mengikuti senbud yang sama lebih dari satu';
             $this->session->set_flashdata('warning',$this->message);
-            redirect('user/registerSenbud');
+            redirect('user/register');
 
         } else {
 
@@ -119,13 +119,13 @@ class User extends CI_Controller {
                  'id_siswa' => $this->session->userdata('id_siswa')      
             );
 
-            $total = $this->crud->get('registrasi_senbud',$count)->num_rows();
+            $total = $this->crud->get('registrasi',$count)->num_rows();
 
             if($total >= 3){
 
                 $this->message = 'Anda tidak bisa mengikuti senbud lebih dari 3';
                 $this->session->set_flashdata('warning',$this->message);
-                redirect('user/registerSenbud');
+                redirect('user/register');
 
             } else {
 
@@ -135,10 +135,10 @@ class User extends CI_Controller {
                     'tanggal_daftar' => date('Y-m-d')
                 );
 
-                $this->crud->insert('registrasi_senbud',$query);
+                $this->crud->insert('registrasi',$query);
                 $this->message = 'Anda berhasil mengikuti senbud :)';
                 $this->session->set_flashdata('success',$this->message);
-                redirect('user/registerSenbud');
+                redirect('user/register');
             }
 
         }
