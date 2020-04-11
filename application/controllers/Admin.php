@@ -22,7 +22,6 @@ class Admin extends CI_Controller {
            'set_akun' => $this->crud->count_table('user'),
            'set_pendaftar' => $this->crud->count_table('registrasi')
         );
-        
         $this->load->view('layouts/header');
         $this->load->view('layouts/nav');
         $this->load->view('admin/dashboard',$data);
